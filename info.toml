@@ -1,0 +1,8 @@
+[meta]
+name = "Lightmap Priority Manager"
+author = "bmx22c"
+category = "Map Editor"
+version = "1.0"
+siteid = 371
+blocks = [ "Plugin_Blocks&ItemsCounter" ]
+
