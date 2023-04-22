@@ -22,9 +22,6 @@ bool Setting_NotifLMApplied = true;
 [Setting category="Notification" name="Processing from Filter bar notification" description="Enable or disable the notification when starting a lightmap change from the Filter text bar."]
 bool Setting_NotifSearchProcess = true;
 
-[Setting category="Notification" name="Scanning notification" description="Enable or disable Scanning notification."]
-bool Setting_NotifScanning = true;
-
 [Setting category="Table" name="Type" description="Enable or disable the Type column."]
 bool Setting_TableType = true;
 
