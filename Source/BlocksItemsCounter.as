@@ -24,6 +24,11 @@ array<Objects@> objects = {};
 array<Objects@> sortableobjects = {};
 array<string> objectsindex = {};
 
+string scanningStatus = "";
+bool isScanning = false;
+array<string> spinner = {Icons::Kenney::MoveTr, Icons::Kenney::MoveRb, Icons::Kenney::MoveLb, Icons::Kenney::MoveTl};
+string loadingText = "";
+bool finishedScanning = false;
 
 ESortColumn sortCol = ESortColumn(-1);
 
@@ -69,6 +74,7 @@ void RenderInterface() {
 				forcesort = true;
 			}
 		}
+		RenderLib::LoadingIndicator();
 		UI::SameLine();
 		UI::PushStyleColor(UI::Col::FrameBg, vec4(0.169,0.388,0.651,0.1));
 		include_default_objects = UI::Checkbox("Include In-Game Blocks and Items", include_default_objects);
@@ -229,7 +235,7 @@ void RenderInterface() {
 			}
 			UI::EndTable();
 			UI::Separator();
-			UI::Text(Icons::Info + " " + infotext);
+			UI::Text(Icons::Info + " " + infotext + loadingText + scanningStatus);
 		}
 	}
 	
