@@ -28,11 +28,19 @@ Default settings work perfectly but you can customize a few things, including:
 	- Count
 	
 ## Note
-The lightmap scan is not the fastest, if anyone has a better scanning algorithm, please let me know on Discord `bmx22c#0001`.
+1. The lightmap scan is not the fastest, if anyone has a better scanning algorithm, please let me know on Discord `bmx22c#0001`.
+2. As Grass blocks (that covers the Stadium floor) are recreated each time you open up the editor, their lightmap priority will not be kept upon reloading. The lightmap priority is still applied and you should only do this once your map is ready to be shipped, making the Grass lightmap priority change the last thing you'll do before computing shadows.
 
 ## Contributing
 Source code is on [GitHub](https://github.com/bmx22c/LightmapPriorityManager). Feel free contribute.
 
 ## Changelog
+### 1.1
+- Added loading indicator at the bottom on the window
+- Lightmap buttons update in real time when clicking on them
+- Added setting to only update the lightmap buttons color when scanning is finished
+- Removed Scanning notification as it's been replaced with text at the bottom of the window
+- Lightmap buttons hover color is correctly set
+
 ### 1.0
 Initial release
