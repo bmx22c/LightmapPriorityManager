@@ -4,8 +4,11 @@ vec4 Setting_LMFoundColor = vec4(0.3,0.7,0.3,1);
 [Setting category="General" name="Lightmap found indicator" description="Change the button color when lightmap priority is found."]
 bool Setting_LMFoundIndicate = true;
 
-[Setting category="General" name="Lightmap priority scanning" description="Enable or disable the lightmap priority scanning."]
+[Setting category="General" name="Lightmap priority scanning" description="Enable or disable the lightmap priority scanning. Won't show previously applied priorities when disabled."]
 bool Setting_LMScanning = true;
+
+[Setting category="General" name="Only apply buttons color when scan is finished" description="Will only change the lightmap buttons color when the lightmap priority scanning is finished."]
+bool Setting_LMChangeButtonWhenFinishScanning = false;
 
 [Setting category="General" name="Displays Filter global lightmap priority buttons" description="Displays lightmap priority buttons next to the Filter text bar."]
 bool Setting_LMFilterButtons = true;
