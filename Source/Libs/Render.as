@@ -31,9 +31,13 @@ namespace RenderLib
 			UI::SameLine();
 		}
 
-		if(Setting_LMFoundIndicate  && object.isLMUnknown == false && object.selectedLM == -3) UI::PushStyleColor(UI::Col::Button, Setting_LMFoundColor);
+		if(((Setting_LMChangeButtonWhenFinishScanning && finishedScanning) || !Setting_LMChangeButtonWhenFinishScanning) && Setting_LMFoundIndicate && object.isLMUnknown == false && object.selectedLM == -3){
+			UI::PushStyleColor(UI::Col::Button, Setting_LMFoundColor);
+			UI::PushStyleColor(UI::Col::ButtonHovered, Setting_LMFoundColor-vec4(.1,.1,.1,0));
+		}
 		if (UI::Button("-3" + "###" + object.name+1)) {
 			LightMap lm;
+			@lm.obj = object;
 			lm.objectName = object.name;
 			lm.lmLvlI = CGameCtnAnchoredObject::EMapElemLightmapQuality::Lowest;
 			lm.lmLvlB = CGameCtnBlock::EMapElemLightmapQuality::Lowest;
@@ -45,11 +49,15 @@ namespace RenderLib
 				startnew(CoroutineFunc(lm.ApplyOther));
 			}
 		}
-		if(Setting_LMFoundIndicate  && object.isLMUnknown == false && object.selectedLM == -3) UI::PopStyleColor(1);
+		if(((Setting_LMChangeButtonWhenFinishScanning && finishedScanning) || !Setting_LMChangeButtonWhenFinishScanning) && Setting_LMFoundIndicate  && object.isLMUnknown == false && object.selectedLM == -3) UI::PopStyleColor(2);
 		UI::SameLine();
-		if(Setting_LMFoundIndicate  && object.isLMUnknown == false && object.selectedLM == -2) UI::PushStyleColor(UI::Col::Button, Setting_LMFoundColor);
+		if(((Setting_LMChangeButtonWhenFinishScanning && finishedScanning) || !Setting_LMChangeButtonWhenFinishScanning) && Setting_LMFoundIndicate && object.isLMUnknown == false && object.selectedLM == -2){
+			UI::PushStyleColor(UI::Col::Button, Setting_LMFoundColor);
+			UI::PushStyleColor(UI::Col::ButtonHovered, Setting_LMFoundColor-vec4(.1,.1,.1,0));
+		}
 		if (UI::Button("-2" + "###" + object.name+2)) {
 			LightMap lm;
+			@lm.obj = object;
 			lm.objectName = object.name;
 			lm.lmLvlI = CGameCtnAnchoredObject::EMapElemLightmapQuality::VeryLow;
 			lm.lmLvlB = CGameCtnBlock::EMapElemLightmapQuality::VeryLow;
@@ -61,11 +69,15 @@ namespace RenderLib
 				startnew(CoroutineFunc(lm.ApplyOther));
 			}
 		}
-		if(Setting_LMFoundIndicate  && object.isLMUnknown == false && object.selectedLM == -2) UI::PopStyleColor(1);
+		if(((Setting_LMChangeButtonWhenFinishScanning && finishedScanning) || !Setting_LMChangeButtonWhenFinishScanning) && Setting_LMFoundIndicate  && object.isLMUnknown == false && object.selectedLM == -2) UI::PopStyleColor(2);
 		UI::SameLine();
-		if(Setting_LMFoundIndicate  && object.isLMUnknown == false && object.selectedLM == -1) UI::PushStyleColor(UI::Col::Button, Setting_LMFoundColor);
+		if(((Setting_LMChangeButtonWhenFinishScanning && finishedScanning) || !Setting_LMChangeButtonWhenFinishScanning) && Setting_LMFoundIndicate && object.isLMUnknown == false && object.selectedLM == -1){
+			UI::PushStyleColor(UI::Col::Button, Setting_LMFoundColor);
+			UI::PushStyleColor(UI::Col::ButtonHovered, Setting_LMFoundColor-vec4(.1,.1,.1,0));
+		}
 		if (UI::Button("-1" + "###" + object.name+3)) {
 			LightMap lm;
+			@lm.obj = object;
 			lm.objectName = object.name;
 			lm.lmLvlI = CGameCtnAnchoredObject::EMapElemLightmapQuality::Low;
 			lm.lmLvlB = CGameCtnBlock::EMapElemLightmapQuality::Low;
@@ -77,11 +89,15 @@ namespace RenderLib
 				startnew(CoroutineFunc(lm.ApplyOther));
 			}
 		}
-		if(Setting_LMFoundIndicate  && object.isLMUnknown == false && object.selectedLM == -1) UI::PopStyleColor(1);
+		if(((Setting_LMChangeButtonWhenFinishScanning && finishedScanning) || !Setting_LMChangeButtonWhenFinishScanning) && Setting_LMFoundIndicate  && object.isLMUnknown == false && object.selectedLM == -1) UI::PopStyleColor(2);
 		UI::SameLine();
-		if(Setting_LMFoundIndicate  && object.isLMUnknown == false && object.selectedLM == 0) UI::PushStyleColor(UI::Col::Button, Setting_LMFoundColor);
+		if(((Setting_LMChangeButtonWhenFinishScanning && finishedScanning) || !Setting_LMChangeButtonWhenFinishScanning) && Setting_LMFoundIndicate && object.isLMUnknown == false && object.selectedLM == 0){
+			UI::PushStyleColor(UI::Col::Button, Setting_LMFoundColor);
+			UI::PushStyleColor(UI::Col::ButtonHovered, Setting_LMFoundColor-vec4(.1,.1,.1,0));
+		}
 		if (UI::Button("0" + "###" + object.name+4)) {
 			LightMap lm;
+			@lm.obj = object;
 			lm.objectName = object.name;
 			lm.lmLvlI = CGameCtnAnchoredObject::EMapElemLightmapQuality::Normal;
 			lm.lmLvlB = CGameCtnBlock::EMapElemLightmapQuality::Normal;
@@ -93,11 +109,15 @@ namespace RenderLib
 				startnew(CoroutineFunc(lm.ApplyOther));
 			}
 		}
-		if(Setting_LMFoundIndicate  && object.isLMUnknown == false && object.selectedLM == 0) UI::PopStyleColor(1);
+		if(((Setting_LMChangeButtonWhenFinishScanning && finishedScanning) || !Setting_LMChangeButtonWhenFinishScanning) && Setting_LMFoundIndicate  && object.isLMUnknown == false && object.selectedLM == 0) UI::PopStyleColor(2);
 		UI::SameLine();
-		if(Setting_LMFoundIndicate  && object.isLMUnknown == false && object.selectedLM == +1) UI::PushStyleColor(UI::Col::Button, Setting_LMFoundColor);
+		if(((Setting_LMChangeButtonWhenFinishScanning && finishedScanning) || !Setting_LMChangeButtonWhenFinishScanning) && Setting_LMFoundIndicate && object.isLMUnknown == false && object.selectedLM == +1){
+			UI::PushStyleColor(UI::Col::Button, Setting_LMFoundColor);
+			UI::PushStyleColor(UI::Col::ButtonHovered, Setting_LMFoundColor-vec4(.1,.1,.1,0));
+		}
 		if (UI::Button("+1" + "###" + object.name+5)) {
 			LightMap lm;
+			@lm.obj = object;
 			lm.objectName = object.name;
 			lm.lmLvlI = CGameCtnAnchoredObject::EMapElemLightmapQuality::High;
 			lm.lmLvlB = CGameCtnBlock::EMapElemLightmapQuality::High;
@@ -109,11 +129,15 @@ namespace RenderLib
 				startnew(CoroutineFunc(lm.ApplyOther));
 			}
 		}
-		if(Setting_LMFoundIndicate  && object.isLMUnknown == false && object.selectedLM == +1) UI::PopStyleColor(1);
+		if(((Setting_LMChangeButtonWhenFinishScanning && finishedScanning) || !Setting_LMChangeButtonWhenFinishScanning) && Setting_LMFoundIndicate  && object.isLMUnknown == false && object.selectedLM == +1) UI::PopStyleColor(2);
 		UI::SameLine();
-		if(Setting_LMFoundIndicate  && object.isLMUnknown == false && object.selectedLM == +2) UI::PushStyleColor(UI::Col::Button, Setting_LMFoundColor);
+		if(((Setting_LMChangeButtonWhenFinishScanning && finishedScanning) || !Setting_LMChangeButtonWhenFinishScanning) && Setting_LMFoundIndicate && object.isLMUnknown == false && object.selectedLM == +2){
+			UI::PushStyleColor(UI::Col::Button, Setting_LMFoundColor);
+			UI::PushStyleColor(UI::Col::ButtonHovered, Setting_LMFoundColor-vec4(.1,.1,.1,0));
+		}
 		if (UI::Button("+2" + "###" + object.name+6)) {
 			LightMap lm;
+			@lm.obj = object;
 			lm.objectName = object.name;
 			lm.lmLvlI = CGameCtnAnchoredObject::EMapElemLightmapQuality::VeryHigh;
 			lm.lmLvlB = CGameCtnBlock::EMapElemLightmapQuality::VeryHigh;
@@ -125,11 +149,15 @@ namespace RenderLib
 				startnew(CoroutineFunc(lm.ApplyOther));
 			}
 		}
-		if(Setting_LMFoundIndicate  && object.isLMUnknown == false && object.selectedLM == +2) UI::PopStyleColor(1);
+		if(((Setting_LMChangeButtonWhenFinishScanning && finishedScanning) || !Setting_LMChangeButtonWhenFinishScanning) && Setting_LMFoundIndicate  && object.isLMUnknown == false && object.selectedLM == +2) UI::PopStyleColor(2);
 		UI::SameLine();
-		if(Setting_LMFoundIndicate  && object.isLMUnknown == false && object.selectedLM == +3) UI::PushStyleColor(UI::Col::Button, Setting_LMFoundColor);
+		if(((Setting_LMChangeButtonWhenFinishScanning && finishedScanning) || !Setting_LMChangeButtonWhenFinishScanning) && Setting_LMFoundIndicate && object.isLMUnknown == false && object.selectedLM == +3){
+			UI::PushStyleColor(UI::Col::Button, Setting_LMFoundColor);
+			UI::PushStyleColor(UI::Col::ButtonHovered, Setting_LMFoundColor-vec4(.1,.1,.1,0));
+		}
 		if (UI::Button("+3" + "###" + object.name+7)) {
 			LightMap lm;
+			@lm.obj = object;
 			lm.objectName = object.name;
 			lm.lmLvlI = CGameCtnAnchoredObject::EMapElemLightmapQuality::Highest;
 			lm.lmLvlB = CGameCtnBlock::EMapElemLightmapQuality::Highest;
@@ -141,7 +169,7 @@ namespace RenderLib
 				startnew(CoroutineFunc(lm.ApplyOther));
 			}
 		}
-		if(Setting_LMFoundIndicate  && object.isLMUnknown == false && object.selectedLM == +3) UI::PopStyleColor(1);
+		if(((Setting_LMChangeButtonWhenFinishScanning && finishedScanning) || !Setting_LMChangeButtonWhenFinishScanning) && Setting_LMFoundIndicate  && object.isLMUnknown == false && object.selectedLM == +3) UI::PopStyleColor(2);
 
 		UI::SameLine(); if (UI::IsItemHovered() && object.type == "Block" && cast<CGameEditorPluginMapMapType>(cast<CGameCtnEditorFree>(GetApp().Editor).PluginMapType) is null) infotext = "Editor plugins are disabled, the coordinates of the blocks are estimated and can be imprecise";
 		UI::SameLine();
@@ -188,5 +216,21 @@ namespace RenderLib
 
 		if(Setting_TableCount) UI::TableNextColumn();
 		if(Setting_TableCount) UI::Text(Text::Format("%lld",object.count));
+	}
+
+	void LoadingIndicator() {
+		if(isScanning){
+			if (Time::get_Now() % 400 > 300) {
+				loadingText = " | " + spinner[0];
+			} else if (Time::get_Now() % 400 > 200) {
+				loadingText = " | " + spinner[1];
+			} else if (Time::get_Now() % 400 > 100) {
+				loadingText = " | " + spinner[2];
+			} else {
+				loadingText = " | " + spinner[3];
+			}
+		}else{
+			loadingText = "";
+		}
 	}
 }
