@@ -1,3 +1,10 @@
+// TODO
+// DONE: Note that Grass blocks don't keep LM after editor map reload
+// DONE: Apply button color right after setting LM
+// DONE: Make scan start more clear
+// DONE: Only apply the button colors when scan is finished
+// DONE: Change button hover color
+
 class Objects { //Items or Blocks
 	string name;
 	int trigger; // CGameItemModel::EnumWaypointType or CGameCtnBlockInfo::EWayPointType
@@ -37,6 +44,7 @@ class SearchParams {
 		for(int i = 0; i < this.sortableobjects.Length; i++){
 			if(this.sortableobjects[i].name.ToLower().Contains(".item.gbx")){
 				LightMap lm;
+				@lm.obj = this.sortableobjects[i];
 				lm.objectName = this.sortableobjects[i].name;
 				lm.lmLvlI = this.lmLvlI;
 				lm.lmLvlB = this.lmLvlB;
@@ -44,6 +52,7 @@ class SearchParams {
 				yield();
 			}else if(this.sortableobjects[i].name.ToLower().Contains(".block.gbx")){
 				LightMap lm;
+				@lm.obj = this.sortableobjects[i];
 				lm.objectName = this.sortableobjects[i].name;
 				lm.lmLvlI = this.lmLvlI;
 				lm.lmLvlB = this.lmLvlB;
@@ -51,6 +60,7 @@ class SearchParams {
 				yield();
 			}else{
 				LightMap lm;
+				@lm.obj = this.sortableobjects[i];
 				lm.objectName = this.sortableobjects[i].name;
 				lm.lmLvlI = this.lmLvlI;
 				lm.lmLvlB = this.lmLvlB;
@@ -82,6 +92,7 @@ class Notification {
 }
 
 class LightMap {
+	Objects@ obj;
 	string objectName;
 	CGameCtnAnchoredObject::EMapElemLightmapQuality lmLvlI;
 	CGameCtnBlock::EMapElemLightmapQuality lmLvlB;
@@ -106,6 +117,7 @@ class LightMap {
 			}
 		}
 
+		obj.selectedLM = LMToIntBlock(lmLvlB);
 		string[] name = objectName.Split("/");
 		Notification notif;
 		notif.text = Icons::Check + " " + name[name.Length-1] + " lightmap priority applied successfully";
@@ -130,6 +142,7 @@ class LightMap {
 			if (i % 100 == 0) yield();
 		}
 
+		obj.selectedLM = LMToIntItem(lmLvlI);
 		string[] name = objectName.Split("/");
 		Notification notif;
 		notif.text = Icons::Check + " " + name[name.Length-1] + " lightmap priority applied successfully";
@@ -154,6 +167,7 @@ class LightMap {
 			if (i % 100 == 0) yield();
 		}
 
+		obj.selectedLM = LMToIntBlock(lmLvlB);
 		string[] name = objectName.Split("/");
 		Notification notif;
 		notif.text = Icons::Check + " " + name[name.Length-1] + " lightmap priority applied successfully";
@@ -174,11 +188,8 @@ class State {
 	Objects@[] sortableobjects;
 
 	void Scan() {
-		Notification notif;
-		notif.text = "Started scanning lightmap priorities...";
-		notif.type = 1;
-		notif.duration = 3000;
-		if(Setting_NotifScanning) notif.Add();
+		scanningStatus = " Scanning lightmap priorities...";
+		isScanning = true;
 
 		auto editor = cast<CGameCtnEditorFree>(GetApp().Editor);
 		auto items = editor.Challenge.AnchoredObjects;
@@ -263,11 +274,12 @@ class State {
 			}
 			if (j % 100 == 0) yield();
 		}
-
-		notif.style = "Success";
-		notif.duration = 5000;
-		notif.text = Icons::Check + " Finished scanning lightmap priorities";
-		if(Setting_NotifScanning) notif.Add();
+		
+		isScanning = false;
+		finishedScanning = true;
+		scanningStatus = " | " + Icons::Check + " Finished scanning lightmap priorities";
+		sleep(3000);
+		scanningStatus = "";
 	}
 }
 
