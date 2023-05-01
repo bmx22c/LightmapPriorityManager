@@ -152,22 +152,48 @@ class LightMap {
 
 	void ApplyOther() {
 		auto editor = cast<CGameCtnEditorFree>(GetApp().Editor);
-		auto blocks = editor.Challenge.Blocks;
-		for(int i = 0; i < blocks.Length; i++){
-			auto block = blocks[i];
-			auto article = cast<CGameCtnArticle>(block.BlockInfo.ArticlePtr);
-			if (article !is null) {
-					string reqBlock = objectName;
-					string mapBlock = article.Name;
 
-					if(reqBlock == mapBlock){
-						block.MapElemLmQuality = lmLvlB;
-					}
+		if(obj.type == "Block"){
+			auto blocks = editor.Challenge.Blocks;
+			for(int i = 0; i < blocks.Length; i++){
+				auto block = blocks[i];
+				auto article = cast<CGameCtnArticle>(block.BlockInfo.ArticlePtr);
+				if (article !is null) {
+						string reqBlock = objectName;
+						string mapBlock = article.Name;
+
+						if(reqBlock == mapBlock){
+							block.MapElemLmQuality = lmLvlB;
+						}
+				}
+				if (i % 100 == 0) yield();
 			}
-			if (i % 100 == 0) yield();
+		}else if(obj.type == "Item"){
+			auto items = editor.Challenge.AnchoredObjects;
+			for(int i = 0; i < items.Length; i++){
+				auto item = items[i];
+				auto article = cast<CGameCtnArticle>(item.ItemModel.ArticlePtr);
+				if (article !is null) {
+					print("inside article");
+					string reqItem = objectName;
+					string mapItem = article.Name;
+
+					if(reqItem == mapItem){
+						item.MapElemLmQuality = lmLvlI;
+					}
+				}else{
+					print("not inside article");
+				}
+				if (i % 100 == 0) yield();
+			}
 		}
 
-		obj.selectedLM = LMToIntBlock(lmLvlB);
+		if(obj.type == "Block"){
+			obj.selectedLM = LMToIntBlock(lmLvlB);
+		}else if(obj.type == "Item"){
+			obj.selectedLM = LMToIntItem(lmLvlI);
+		}
+
 		string[] name = objectName.Split("/");
 		Notification notif;
 		notif.text = Icons::Check + " " + name[name.Length-1] + " lightmap priority applied successfully";
@@ -249,7 +275,6 @@ class State {
 			if (j % 100 == 0) yield();
 		}
 
-		
 		for(int j = 0; j < blocks.Length; j++){
 			auto block = blocks[j];
 			auto article = cast<CGameCtnArticle>(block.BlockInfo.ArticlePtr);
@@ -271,6 +296,32 @@ class State {
 						}
 					}
 				}
+			}
+			if (j % 100 == 0) yield();
+		}
+
+		for(int j = 0; j < items.Length; j++){
+			auto item = items[j];
+			auto article = cast<CGameCtnArticle>(item.ItemModel.ArticlePtr);
+			if (article !is null) {
+				string mapItem = article.Name;
+
+				for(int i = 0; i < sortableobjects.Length; i++){
+					string reqItem = sortableobjects[i].name;
+
+					if(reqItem == mapItem){
+						if(sortableobjects[i].firstScan == true){
+							sortableobjects[i].firstScan = false;
+							sortableobjects[i].selectedLM = LMToIntItem(item.MapElemLmQuality);
+							sortableobjects[i].isLMUnknown = false;
+						}else{
+							if(sortableobjects[i].selectedLM != LMToIntItem(item.MapElemLmQuality)){
+								sortableobjects[i].isLMUnknown = true;
+							}
+						}
+					}
+				}
+
 			}
 			if (j % 100 == 0) yield();
 		}
